@@ -11,7 +11,7 @@ Code template for Lab 3 Part B: differential kinematics, manipulability, and res
 | `my_robot/` | Robot descriptions. Includes `Dummy_articulated_RRR.urdf`, a 3-joint revolute arm. |
 | `requirements.txt` | Python package versions for this lab. |
 
-## Setup
+## Setup(Optional)
 
 You need Python 3.11 or newer. Check your version with:
 
@@ -23,11 +23,11 @@ Install the packages from the repository folder:
 
 ```
 pip install -r requirements.txt
+python fix_swift.py
 ```
 
 Open the notebook in VS Code with the Python and Jupyter extensions, and select the Python environment you installed into as the kernel. Open the repository folder itself, because the robot files are loaded from `my_robot/` relative to the notebook's working directory.
 
-To use classic Jupyter instead, also run `pip install notebook`.
 
 ## Using your robot
 
@@ -45,4 +45,4 @@ To use classic Jupyter instead, also run `pip install notebook`.
 
 ## Submission
 
-Rename the notebook with your group number, for example `G01_Lab3_part_B_main.ipynb`, and fill in the group number and members in the cell near the top.
+Rename the notebook with your group number, for example `G01_Lab3_part_B_main.ipynb`, and fill in the group number and members in the cell near the top. Then, zip lab folder, and rename to FRA371_Lab3_Gxx (xx is group number).

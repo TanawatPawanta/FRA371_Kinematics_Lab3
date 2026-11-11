@@ -4,7 +4,6 @@ from roboticstoolbox.robot.ERobot import ERobot
 import spatialmath as sm
 import spatialgeometry as sg
 from swift.Swift import Swift
-import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from pathlib import Path
@@ -134,52 +133,7 @@ def UpdateBoxPosition(box, P_current, V, dt):
     P_new = P_current + V * dt
     box.T = sm.SE3(P_new[0], P_new[1], P_new[2])  # Update the pose of the box
 
-def VizRobotWorkSpace(robot:ERobot,num_samples:int=15000):
-    #Generate random joint configurations
-    q_min = robot.qlim[0, :]
-    q_max = robot.qlim[1, :]
 
-    # Manually bound the continuous Joint 1 to one full rotation [-pi, pi]
-    if np.isinf(q_min[0]) or q_min[0] < -np.pi: q_min[0] = -np.pi
-    if np.isinf(q_max[0]) or q_max[0] > np.pi:  q_max[0] = np.pi
-
-    q_random = np.random.uniform(q_min, q_max, size=(num_samples, robot.n))
-
-    print("Calculating Forward Kinematics...")
-
-    #Compute Forward Kinematics and extract [X, Y, Z]
-    positions = robot.fkine(q_random).t 
-
-    print("Generating interactive plot...")
-
-    #Create the Interactive Plotly Figure
-    fig = go.Figure(data=[go.Scatter3d(
-        x=positions[:, 0],
-        y=positions[:, 1],
-        z=positions[:, 2],
-        mode='markers',
-        marker=dict(
-            size=2,
-            color=positions[:, 2],    # Color points by their Z-height
-            colorscale='Viridis',     # A visually pleasing color map
-            opacity=0.4               # Slight transparency to see density
-        )
-    )])
-
-    #Format the layout and camera
-    fig.update_layout(
-        title="Interactive Robot Reachable Workspace",
-        margin=dict(l=0, r=0, b=0, t=40), # Removes unnecessary white space
-        scene=dict(
-            xaxis_title='X (meters)',
-            yaxis_title='Y (meters)',
-            zaxis_title='Z (meters)',
-            aspectmode='data'  # CRITICAL: Ensures the 3D space isn't artificially stretched
-        )
-    )
-
-    # Show the plot
-    fig.show()
 
 def PlotTrackingError(timestamp: np.ndarray, err_hist: np.ndarray):
     """
