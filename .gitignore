@@ -1,0 +1,10 @@
+# Python virtual environment
+FRA371_Lab3_env/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/

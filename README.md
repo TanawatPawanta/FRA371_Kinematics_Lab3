@@ -19,14 +19,76 @@ You need Python 3.11 or newer. Check your version with:
 python --version
 ```
 
-Install the packages from the repository folder:
+### Create a virtual environment
+
+A virtual environment keeps this lab's packages separate from other Python projects. In a terminal opened in the repository folder, create one named `FRA371_Lab3_env`:
+
+```
+python -m venv FRA371_Lab3_env
+```
+
+You only need to do this once.
+
+### Activate the environment
+
+Activate it every time you open a new terminal to work on the lab.
+
+Windows (PowerShell, the default terminal in VS Code):
+
+```
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+FRA371_Lab3_env\Scripts\Activate.ps1
+```
+
+PowerShell blocks scripts by default, so the first line allows them for this terminal window only. It changes nothing permanently, so run both lines every time you open a new terminal.
+
+Windows (Command Prompt only, not PowerShell):
+
+```
+FRA371_Lab3_env\Scripts\activate.bat
+```
+
+macOS / Linux:
+
+```
+source FRA371_Lab3_env/bin/activate
+```
+
+When it is active, the prompt starts with `(FRA371_Lab3_env)`. To leave the environment, run `deactivate`.
+### Install the packages
+
+With the environment active, install the packages from the repository folder:
 
 ```
 pip install -r requirements.txt
 python fix_swift.py
 ```
 
-Open the notebook in VS Code with the Python and Jupyter extensions, and select the Python environment you installed into as the kernel. Open the repository folder itself, because the robot files are loaded from `my_robot/` relative to the notebook's working directory.
+Open the notebook in VS Code with the Python and Jupyter extensions, and select the `FRA371_Lab3_env` environment as the kernel. Open the repository folder itself, because the robot files are loaded from `my_robot/` relative to the notebook's working directory.
+
+### Delete the environment
+
+To remove the environment, for example to start over with a clean install, first close the notebook (or shut down its kernel) and run `deactivate` if the environment is active. Then, in the repository folder, delete its folder:
+
+Windows (PowerShell):
+
+```
+Remove-Item -Recurse -Force FRA371_Lab3_env
+```
+
+Windows (Command Prompt):
+
+```
+rmdir /s /q FRA371_Lab3_env
+```
+
+macOS / Linux:
+
+```
+rm -rf FRA371_Lab3_env
+```
+
+This only deletes the environment and its installed packages. Your notebook and lab files are not affected. To use the lab again, repeat the steps from **Create a virtual environment**.
 
 
 ## Using your robot
